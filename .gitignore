@@ -1,0 +1,49 @@
+## Visual Studio / .NET Core & .NET Framework
+#############################################
+# Archivos de usuario y configuraciones locales de VS (¡El origen de tu error!)
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Carpetas de compilación (Binarios de salida)
+[Bb]in/
+[Oo]bj/
+[Log]/
+
+# Archivos generados por Rider / JetBrains (Si llegas a usarlo)
+.idea/
+
+# Herramientas de publicación y despliegue local
+*.publish.htm
+*.azureauth
+*.pubxml
+*.pubxml.user
+
+## Archivos de Bases de Datos (Oracle, SQL Server, etc.)
+#######################################################
+*.dbmdl
+*.jfm
+*.sqlsuo
+*.userqueries
+*.ldf
+*.mdf
+*.sdf
+
+## Paquetes de dependencias y Node (Por si usas JavaScript/Frontend)
+###################################################################
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+artifacts/
+node_modules/
+.pnpm-store/
+
+## Sistema Operativo y Varios
+#############################
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store

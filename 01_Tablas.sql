@@ -1,0 +1,362 @@
+/* ============================================================
+   TABLA: ESTADOS_CHEQUE
+   Guarda los estados permitidos para un cheque.
+   Estados requeridos:
+   1 - DISPONIBLE
+   2 - GENERADO
+   3 - LIBERADO
+   4 - ENTREGADO
+   5 - ANULADO
+   ============================================================ */
+
+CREATE TABLE ESTADOS_CHEQUE (
+    ID_ESTADO       NUMBER(1),
+    NOMBRE_ESTADO   VARCHAR2(30) NOT NULL,
+    DESCRIPCION     VARCHAR2(200),
+
+    CONSTRAINT PK_ESTADOS_CHEQUE PRIMARY KEY (ID_ESTADO),
+    CONSTRAINT UQ_ESTADOS_CHEQUE_NOMBRE UNIQUE (NOMBRE_ESTADO),
+    CONSTRAINT CK_ESTADOS_CHEQUE_ID CHECK (ID_ESTADO BETWEEN 1 AND 5)
+);
+
+/* ============================================================
+   TABLA: USUARIOS_SISTEMA
+   Guarda los usuarios internos del sistema y su rango permitido
+   para emitir cheques.
+
+   La columna USUARIO_BD debe coincidir con el usuario de Oracle
+   que cree la persona encargada de seguridad.
+   ============================================================ */
+
+CREATE TABLE USUARIOS_SISTEMA (
+    ID_USUARIO       NUMBER(10),
+    USUARIO_BD       VARCHAR2(30) NOT NULL,
+    NOMBRE_COMPLETO  VARCHAR2(100) NOT NULL,
+    AREA             VARCHAR2(30) NOT NULL,
+    MONTO_MINIMO     NUMBER(12,2) DEFAULT 0 NOT NULL,
+    MONTO_MAXIMO     NUMBER(12,2) DEFAULT 0 NOT NULL,
+    ESTADO           CHAR(1) DEFAULT 'A' NOT NULL,
+    FECHA_CREACION   DATE DEFAULT SYSDATE NOT NULL,
+
+    CONSTRAINT PK_USUARIOS_SISTEMA PRIMARY KEY (ID_USUARIO),
+    CONSTRAINT UQ_USUARIOS_SISTEMA_USUARIO UNIQUE (USUARIO_BD),
+
+    CONSTRAINT CK_USUARIOS_AREA CHECK (
+        AREA IN ('PAGOS', 'AUDITORIA', 'GERENCIA', 'CAJERO', 'JEFE_PAGOS')
+    ),
+
+    CONSTRAINT CK_USUARIOS_ESTADO CHECK (
+        ESTADO IN ('A', 'I')
+    ),
+
+    CONSTRAINT CK_USUARIOS_MONTOS CHECK (
+        MONTO_MINIMO >= 0
+        AND MONTO_MAXIMO >= MONTO_MINIMO
+    )
+);
+
+/* ============================================================
+   TABLA: BENEFICIARIOS
+   Guarda las personas o empresas a quienes se les emite cheque.
+   ============================================================ */
+
+CREATE TABLE BENEFICIARIOS (
+    ID_BENEFICIARIO  NUMBER(10),
+    NIT              VARCHAR2(20),
+    NOMBRE           VARCHAR2(150) NOT NULL,
+    DIRECCION        VARCHAR2(200),
+    TELEFONO         VARCHAR2(20),
+    ESTADO           CHAR(1) DEFAULT 'A' NOT NULL,
+
+    CONSTRAINT PK_BENEFICIARIOS PRIMARY KEY (ID_BENEFICIARIO),
+    CONSTRAINT UQ_BENEFICIARIOS_NIT UNIQUE (NIT),
+    CONSTRAINT CK_BENEFICIARIOS_ESTADO CHECK (ESTADO IN ('A', 'I'))
+);
+
+/* ============================================================
+   TABLA: CUENTAS_BANCARIAS
+   Guarda las cuentas bancarias de la empresa.
+   SALDO_ACTUAL: saldo real de la cuenta.
+   SALDO_RESERVADO: monto apartado por cheques generados
+   pero todavía no entregados.
+   ============================================================ */
+
+CREATE TABLE CUENTAS_BANCARIAS (
+    ID_CUENTA        NUMBER(10),
+    BANCO            VARCHAR2(100) NOT NULL,
+    NUMERO_CUENTA    VARCHAR2(30) NOT NULL,
+    NOMBRE_CUENTA    VARCHAR2(100) NOT NULL,
+    TIPO_CUENTA      VARCHAR2(20) NOT NULL,
+    MONEDA           CHAR(3) DEFAULT 'GTQ' NOT NULL,
+    SALDO_ACTUAL     NUMBER(14,2) DEFAULT 0 NOT NULL,
+    SALDO_RESERVADO  NUMBER(14,2) DEFAULT 0 NOT NULL,
+    ESTADO           CHAR(1) DEFAULT 'A' NOT NULL,
+    FECHA_CREACION   DATE DEFAULT SYSDATE NOT NULL,
+
+    CONSTRAINT PK_CUENTAS_BANCARIAS PRIMARY KEY (ID_CUENTA),
+    CONSTRAINT UQ_CUENTAS_NUMERO UNIQUE (NUMERO_CUENTA),
+
+    CONSTRAINT CK_CUENTAS_TIPO CHECK (
+        TIPO_CUENTA IN ('MONETARIA', 'AHORRO')
+    ),
+
+    CONSTRAINT CK_CUENTAS_MONEDA CHECK (
+        MONEDA IN ('GTQ', 'USD')
+    ),
+
+    CONSTRAINT CK_CUENTAS_ESTADO CHECK (
+        ESTADO IN ('A', 'I')
+    ),
+
+    CONSTRAINT CK_CUENTAS_SALDOS CHECK (
+        SALDO_ACTUAL >= 0
+        AND SALDO_RESERVADO >= 0
+        AND SALDO_RESERVADO <= SALDO_ACTUAL
+    )
+);
+
+/* ============================================================
+   TABLA: CHEQUERAS
+   Guarda las chequeras asociadas a cada cuenta bancaria.
+   CORRELATIVO_ACTUAL indica el siguiente cheque disponible.
+   ============================================================ */
+
+CREATE TABLE CHEQUERAS (
+    ID_CHEQUERA        NUMBER(10),
+    ID_CUENTA          NUMBER(10) NOT NULL,
+    NUMERO_CHEQUERA    VARCHAR2(30) NOT NULL,
+    NUMERO_INICIAL     NUMBER(10) NOT NULL,
+    NUMERO_FINAL       NUMBER(10) NOT NULL,
+    CORRELATIVO_ACTUAL NUMBER(10) NOT NULL,
+    FECHA_REGISTRO     DATE DEFAULT SYSDATE NOT NULL,
+    ESTADO             CHAR(1) DEFAULT 'A' NOT NULL,
+
+    CONSTRAINT PK_CHEQUERAS PRIMARY KEY (ID_CHEQUERA),
+
+    CONSTRAINT FK_CHEQUERAS_CUENTAS FOREIGN KEY (ID_CUENTA)
+        REFERENCES CUENTAS_BANCARIAS (ID_CUENTA),
+
+    CONSTRAINT UQ_CHEQUERAS_CUENTA_NUMERO UNIQUE (ID_CUENTA, NUMERO_CHEQUERA),
+
+    CONSTRAINT UQ_CHEQUERAS_ID_CUENTA UNIQUE (ID_CHEQUERA, ID_CUENTA),
+
+    CONSTRAINT CK_CHEQUERAS_RANGO CHECK (
+        NUMERO_FINAL >= NUMERO_INICIAL
+    ),
+
+    CONSTRAINT CK_CHEQUERAS_CORRELATIVO CHECK (
+        CORRELATIVO_ACTUAL BETWEEN NUMERO_INICIAL AND NUMERO_FINAL + 1
+    ),
+
+    CONSTRAINT CK_CHEQUERAS_ESTADO CHECK (
+        ESTADO IN ('A', 'C', 'I')
+    )
+);
+
+/* ============================================================
+   TABLA: CHEQUES
+   Guarda cada cheque de una chequera.
+
+   Un cheque puede iniciar como DISPONIBLE.
+   Cuando se genera, cambia a GENERADO y se llenan los datos
+   del beneficiario, monto, concepto y usuario que genera.
+   ============================================================ */
+
+CREATE TABLE CHEQUES (
+    ID_CHEQUE              NUMBER(10),
+    ID_CHEQUERA            NUMBER(10) NOT NULL,
+    ID_CUENTA              NUMBER(10) NOT NULL,
+    NUMERO_CHEQUE          NUMBER(10) NOT NULL,
+    ID_BENEFICIARIO        NUMBER(10),
+    MONTO                  NUMBER(12,2),
+    CONCEPTO               VARCHAR2(250),
+    ID_ESTADO              NUMBER(1) DEFAULT 1 NOT NULL,
+
+    REQUIERE_AUDITORIA     CHAR(1) DEFAULT 'N' NOT NULL,
+    REQUIERE_GERENCIA      CHAR(1) DEFAULT 'N' NOT NULL,
+
+    USUARIO_GENERA         VARCHAR2(30),
+    FECHA_GENERACION       DATE,
+
+    USUARIO_AUDITORIA      VARCHAR2(30),
+    FECHA_AUDITORIA        DATE,
+    FIRMA_AUDITORIA        VARCHAR2(200),
+
+    USUARIO_GERENCIA       VARCHAR2(30),
+    FECHA_GERENCIA         DATE,
+    FIRMA_GERENCIA         VARCHAR2(200),
+
+    USUARIO_ENTREGA        VARCHAR2(30),
+    FECHA_ENTREGA          DATE,
+
+    OBSERVACION            VARCHAR2(300),
+
+    CONSTRAINT PK_CHEQUES PRIMARY KEY (ID_CHEQUE),
+
+    CONSTRAINT FK_CHEQUES_CHEQUERAS FOREIGN KEY (ID_CHEQUERA)
+        REFERENCES CHEQUERAS (ID_CHEQUERA),
+
+    CONSTRAINT FK_CHEQUES_CUENTAS FOREIGN KEY (ID_CUENTA)
+        REFERENCES CUENTAS_BANCARIAS (ID_CUENTA),
+
+    CONSTRAINT FK_CHEQUES_CHEQUERA_CUENTA FOREIGN KEY (ID_CHEQUERA, ID_CUENTA)
+        REFERENCES CHEQUERAS (ID_CHEQUERA, ID_CUENTA),
+
+    CONSTRAINT FK_CHEQUES_BENEFICIARIOS FOREIGN KEY (ID_BENEFICIARIO)
+        REFERENCES BENEFICIARIOS (ID_BENEFICIARIO),
+
+    CONSTRAINT FK_CHEQUES_ESTADOS FOREIGN KEY (ID_ESTADO)
+        REFERENCES ESTADOS_CHEQUE (ID_ESTADO),
+
+    CONSTRAINT FK_CHEQUES_USUARIO_GENERA FOREIGN KEY (USUARIO_GENERA)
+        REFERENCES USUARIOS_SISTEMA (USUARIO_BD),
+
+    CONSTRAINT FK_CHEQUES_USUARIO_AUDITORIA FOREIGN KEY (USUARIO_AUDITORIA)
+        REFERENCES USUARIOS_SISTEMA (USUARIO_BD),
+
+    CONSTRAINT FK_CHEQUES_USUARIO_GERENCIA FOREIGN KEY (USUARIO_GERENCIA)
+        REFERENCES USUARIOS_SISTEMA (USUARIO_BD),
+
+    CONSTRAINT FK_CHEQUES_USUARIO_ENTREGA FOREIGN KEY (USUARIO_ENTREGA)
+        REFERENCES USUARIOS_SISTEMA (USUARIO_BD),
+
+    CONSTRAINT UQ_CHEQUES_NUMERO UNIQUE (ID_CHEQUERA, NUMERO_CHEQUE),
+
+    CONSTRAINT CK_CHEQUES_MONTO CHECK (
+        (ID_ESTADO = 1 AND MONTO IS NULL)
+        OR
+        (ID_ESTADO <> 1 AND MONTO > 0)
+    ),
+
+    CONSTRAINT CK_CHEQUES_DATOS_GENERADOS CHECK (
+        ID_ESTADO = 1
+        OR
+        (
+            ID_BENEFICIARIO IS NOT NULL
+            AND MONTO IS NOT NULL
+            AND FECHA_GENERACION IS NOT NULL
+        )
+    ),
+
+    CONSTRAINT CK_CHEQUES_AUDITORIA CHECK (
+        REQUIERE_AUDITORIA IN ('S', 'N')
+    ),
+
+    CONSTRAINT CK_CHEQUES_GERENCIA CHECK (
+        REQUIERE_GERENCIA IN ('S', 'N')
+    )
+);
+
+/* ============================================================
+   TABLA: LIBERACIONES_CHEQUE
+   Guarda las liberaciones realizadas por Auditoria o Gerencia.
+   Sirve para reportar cheques liberados por grupo y fecha.
+   ============================================================ */
+
+CREATE TABLE LIBERACIONES_CHEQUE (
+    ID_LIBERACION     NUMBER(10),
+    ID_CHEQUE         NUMBER(10) NOT NULL,
+    GRUPO_LIBERACION  VARCHAR2(20) NOT NULL,
+    USUARIO_LIBERA    VARCHAR2(30) NOT NULL,
+    FECHA_LIBERACION  DATE DEFAULT SYSDATE NOT NULL,
+    RESULTADO         VARCHAR2(20) DEFAULT 'APROBADO' NOT NULL,
+    OBSERVACION       VARCHAR2(300),
+
+    CONSTRAINT PK_LIBERACIONES_CHEQUE PRIMARY KEY (ID_LIBERACION),
+
+    CONSTRAINT FK_LIBERACIONES_CHEQUES FOREIGN KEY (ID_CHEQUE)
+        REFERENCES CHEQUES (ID_CHEQUE),
+
+    CONSTRAINT FK_LIBERACIONES_USUARIOS FOREIGN KEY (USUARIO_LIBERA)
+        REFERENCES USUARIOS_SISTEMA (USUARIO_BD),
+
+    CONSTRAINT CK_LIBERACIONES_GRUPO CHECK (
+        GRUPO_LIBERACION IN ('AUDITORIA', 'GERENCIA')
+    ),
+
+    CONSTRAINT CK_LIBERACIONES_RESULTADO CHECK (
+        RESULTADO IN ('APROBADO', 'RECHAZADO')
+    ),
+
+    CONSTRAINT UQ_LIBERACIONES_CHEQUE_GRUPO UNIQUE (ID_CHEQUE, GRUPO_LIBERACION)
+);
+
+/* ============================================================
+   TABLA: MOVIMIENTOS_CUENTA
+   Guarda movimientos de dinero en las cuentas bancarias.
+   DEPOSITO suma saldo.
+   CHEQUE resta saldo cuando el cheque es entregado.
+   AJUSTE puede sumar o restar dependiendo de la naturaleza.
+   ============================================================ */
+
+CREATE TABLE MOVIMIENTOS_CUENTA (
+    ID_MOVIMIENTO     NUMBER(10),
+    ID_CUENTA         NUMBER(10) NOT NULL,
+    ID_CHEQUE         NUMBER(10),
+    TIPO_MOVIMIENTO   VARCHAR2(20) NOT NULL,
+    NATURALEZA        CHAR(1) NOT NULL,
+    MONTO             NUMBER(14,2) NOT NULL,
+    SALDO_ANTERIOR    NUMBER(14,2),
+    SALDO_NUEVO       NUMBER(14,2),
+    FECHA_MOVIMIENTO  DATE DEFAULT SYSDATE NOT NULL,
+    USUARIO_REGISTRA  VARCHAR2(30),
+    DESCRIPCION       VARCHAR2(300),
+
+    CONSTRAINT PK_MOVIMIENTOS_CUENTA PRIMARY KEY (ID_MOVIMIENTO),
+
+    CONSTRAINT FK_MOVIMIENTOS_CUENTAS FOREIGN KEY (ID_CUENTA)
+        REFERENCES CUENTAS_BANCARIAS (ID_CUENTA),
+
+    CONSTRAINT FK_MOVIMIENTOS_CHEQUES FOREIGN KEY (ID_CHEQUE)
+        REFERENCES CHEQUES (ID_CHEQUE),
+
+    CONSTRAINT FK_MOVIMIENTOS_USUARIOS FOREIGN KEY (USUARIO_REGISTRA)
+        REFERENCES USUARIOS_SISTEMA (USUARIO_BD),
+
+    CONSTRAINT CK_MOVIMIENTOS_TIPO CHECK (
+        TIPO_MOVIMIENTO IN ('DEPOSITO', 'CHEQUE', 'AJUSTE')
+    ),
+
+    CONSTRAINT CK_MOVIMIENTOS_NATURALEZA CHECK (
+        NATURALEZA IN ('D', 'C')
+    ),
+
+    CONSTRAINT CK_MOVIMIENTOS_MONTO CHECK (
+        MONTO > 0
+    ),
+
+    CONSTRAINT CK_MOVIMIENTOS_REGLA CHECK (
+        (TIPO_MOVIMIENTO = 'CHEQUE' AND ID_CHEQUE IS NOT NULL AND NATURALEZA = 'D')
+        OR
+        (TIPO_MOVIMIENTO = 'DEPOSITO' AND NATURALEZA = 'C')
+        OR
+        (TIPO_MOVIMIENTO = 'AJUSTE')
+    )
+);
+
+/* ============================================================
+   TABLA: BITACORA_AUDITORIA
+   Guarda acciones importantes, modificaciones, eliminaciones
+   e intentos fallidos.
+   No tiene FK obligatoria al usuario para permitir registrar
+   intentos de usuarios no configurados.
+   ============================================================ */
+
+CREATE TABLE BITACORA_AUDITORIA (
+    ID_BITACORA      NUMBER(10),
+    USUARIO_BD       VARCHAR2(30),
+    FECHA_EVENTO     DATE DEFAULT SYSDATE NOT NULL,
+    TABLA_AFECTADA   VARCHAR2(50),
+    ID_REGISTRO      VARCHAR2(50),
+    ACCION           VARCHAR2(50) NOT NULL,
+    VALOR_ANTERIOR   CLOB,
+    VALOR_NUEVO      CLOB,
+    RESULTADO        VARCHAR2(20) NOT NULL,
+    DESCRIPCION      VARCHAR2(500),
+
+    CONSTRAINT PK_BITACORA_AUDITORIA PRIMARY KEY (ID_BITACORA),
+
+    CONSTRAINT CK_BITACORA_RESULTADO CHECK (
+        RESULTADO IN ('EXITO', 'FALLIDO')
+    )
+);
