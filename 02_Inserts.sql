@@ -54,8 +54,7 @@ INSERT INTO ESTADOS_CHEQUE (
     'Cheque anulado por solicitud autorizada.'
 );
 
-/* Usuarios base del sistema.
-*/
+/* Usuarios del sistema */
 
 INSERT INTO USUARIOS_SISTEMA (
     ID_USUARIO,
@@ -165,6 +164,115 @@ INSERT INTO USUARIOS_SISTEMA (
     'A'
 );
 
+INSERT INTO USUARIOS_SISTEMA (
+    ID_USUARIO,
+    USUARIO_BD,
+    NOMBRE_COMPLETO,
+    AREA,
+    MONTO_MINIMO,
+    MONTO_MAXIMO,
+    ESTADO
+) VALUES (
+    SEQ_USUARIOS_SISTEMA.NEXTVAL,
+    'USR_MARIA_PAGOS',
+    'Maria Lopez Pagos',
+    'PAGOS',
+    0,
+    4999.99,
+    'A'
+);
+
+INSERT INTO USUARIOS_SISTEMA (
+    ID_USUARIO,
+    USUARIO_BD,
+    NOMBRE_COMPLETO,
+    AREA,
+    MONTO_MINIMO,
+    MONTO_MAXIMO,
+    ESTADO
+) VALUES (
+    SEQ_USUARIOS_SISTEMA.NEXTVAL,
+    'USR_CARLOS_PAGOS',
+    'Carlos Ramirez Pagos',
+    'PAGOS',
+    5000,
+    25000,
+    'A'
+);
+
+INSERT INTO USUARIOS_SISTEMA (
+    ID_USUARIO,
+    USUARIO_BD,
+    NOMBRE_COMPLETO,
+    AREA,
+    MONTO_MINIMO,
+    MONTO_MAXIMO,
+    ESTADO
+) VALUES (
+    SEQ_USUARIOS_SISTEMA.NEXTVAL,
+    'USR_PAGOS_SENIOR',
+    'Usuario Pagos Senior',
+    'PAGOS',
+    1,
+    50000,
+    'A'
+);
+
+INSERT INTO USUARIOS_SISTEMA (
+    ID_USUARIO,
+    USUARIO_BD,
+    NOMBRE_COMPLETO,
+    AREA,
+    MONTO_MINIMO,
+    MONTO_MAXIMO,
+    ESTADO
+) VALUES (
+    SEQ_USUARIOS_SISTEMA.NEXTVAL,
+    'USR_AUDITOR2',
+    'Segundo Usuario Auditoria',
+    'AUDITORIA',
+    0,
+    0,
+    'A'
+);
+
+INSERT INTO USUARIOS_SISTEMA (
+    ID_USUARIO,
+    USUARIO_BD,
+    NOMBRE_COMPLETO,
+    AREA,
+    MONTO_MINIMO,
+    MONTO_MAXIMO,
+    ESTADO
+) VALUES (
+    SEQ_USUARIOS_SISTEMA.NEXTVAL,
+    'USR_GERENTE2',
+    'Segundo Usuario Gerencia',
+    'GERENCIA',
+    0,
+    0,
+    'A'
+);
+
+INSERT INTO USUARIOS_SISTEMA (
+    ID_USUARIO,
+    USUARIO_BD,
+    NOMBRE_COMPLETO,
+    AREA,
+    MONTO_MINIMO,
+    MONTO_MAXIMO,
+    ESTADO
+) VALUES (
+    SEQ_USUARIOS_SISTEMA.NEXTVAL,
+    'USR_CAJERO2',
+    'Segundo Usuario Cajero',
+    'CAJERO',
+    0,
+    0,
+    'A'
+);
+
+
 /* Beneficiarios */
 
 INSERT INTO BENEFICIARIOS (
@@ -199,6 +307,134 @@ INSERT INTO BENEFICIARIOS (
     'A'
 );
 
+INSERT INTO BENEFICIARIOS (
+    ID_BENEFICIARIO,
+    NIT,
+    NOMBRE,
+    DIRECCION,
+    TELEFONO,
+    ESTADO
+) VALUES (
+    SEQ_BENEFICIARIOS.NEXTVAL,
+    '1111111-1',
+    'Distribuidora Maya SA',
+    'Zona 1, Guatemala',
+    '2300-1001',
+    'A'
+);
+
+INSERT INTO BENEFICIARIOS (
+    ID_BENEFICIARIO,
+    NIT,
+    NOMBRE,
+    DIRECCION,
+    TELEFONO,
+    ESTADO
+) VALUES (
+    SEQ_BENEFICIARIOS.NEXTVAL,
+    '2222222-2',
+    'Transportes Verapaz',
+    'Coban, Alta Verapaz',
+    '2300-1002',
+    'A'
+);
+
+INSERT INTO BENEFICIARIOS (
+    ID_BENEFICIARIO,
+    NIT,
+    NOMBRE,
+    DIRECCION,
+    TELEFONO,
+    ESTADO
+) VALUES (
+    SEQ_BENEFICIARIOS.NEXTVAL,
+    '3333333-3',
+    'Constructora Los Pinos',
+    'Zona 10, Guatemala',
+    '2300-1003',
+    'A'
+);
+
+INSERT INTO BENEFICIARIOS (
+    ID_BENEFICIARIO,
+    NIT,
+    NOMBRE,
+    DIRECCION,
+    TELEFONO,
+    ESTADO
+) VALUES (
+    SEQ_BENEFICIARIOS.NEXTVAL,
+    '4444444-4',
+    'Clinica Santa Lucia',
+    'Zona 9, Guatemala',
+    '2300-1004',
+    'A'
+);
+
+INSERT INTO BENEFICIARIOS (
+    ID_BENEFICIARIO,
+    NIT,
+    NOMBRE,
+    DIRECCION,
+    TELEFONO,
+    ESTADO
+) VALUES (
+    SEQ_BENEFICIARIOS.NEXTVAL,
+    '5555555-5',
+    'Ferreteria El Quetzal',
+    'San Cristobal, Mixco',
+    '2300-1005',
+    'A'
+);
+
+INSERT INTO BENEFICIARIOS (
+    ID_BENEFICIARIO,
+    NIT,
+    NOMBRE,
+    DIRECCION,
+    TELEFONO,
+    ESTADO
+) VALUES (
+    SEQ_BENEFICIARIOS.NEXTVAL,
+    '6666666-6',
+    'Electro Servicios GT',
+    'Zona 12, Guatemala',
+    '2300-1006',
+    'A'
+);
+
+INSERT INTO BENEFICIARIOS (
+    ID_BENEFICIARIO,
+    NIT,
+    NOMBRE,
+    DIRECCION,
+    TELEFONO,
+    ESTADO
+) VALUES (
+    SEQ_BENEFICIARIOS.NEXTVAL,
+    '7777777-7',
+    'Papeleria Central',
+    'Zona 4, Guatemala',
+    '2300-1007',
+    'A'
+);
+
+INSERT INTO BENEFICIARIOS (
+    ID_BENEFICIARIO,
+    NIT,
+    NOMBRE,
+    DIRECCION,
+    TELEFONO,
+    ESTADO
+) VALUES (
+    SEQ_BENEFICIARIOS.NEXTVAL,
+    '8888888-8',
+    'Servicios Contables AV',
+    'Coban, Alta Verapaz',
+    '2300-1008',
+    'A'
+);
+
 /* Cuenta bancaria principal */
 
 INSERT INTO CUENTAS_BANCARIAS (
@@ -223,6 +459,50 @@ INSERT INTO CUENTAS_BANCARIAS (
     'A'
 );
 
+INSERT INTO CUENTAS_BANCARIAS (
+    ID_CUENTA,
+    BANCO,
+    NUMERO_CUENTA,
+    NOMBRE_CUENTA,
+    TIPO_CUENTA,
+    MONEDA,
+    SALDO_ACTUAL,
+    SALDO_RESERVADO,
+    ESTADO
+) VALUES (
+    SEQ_CUENTAS_BANCARIAS.NEXTVAL,
+    'Banrural',
+    '002-000456-8',
+    'NUEVA VERAPAZ - Cuenta Proveedores',
+    'MONETARIA',
+    'GTQ',
+    250000,
+    0,
+    'A'
+);
+
+INSERT INTO CUENTAS_BANCARIAS (
+    ID_CUENTA,
+    BANCO,
+    NUMERO_CUENTA,
+    NOMBRE_CUENTA,
+    TIPO_CUENTA,
+    MONEDA,
+    SALDO_ACTUAL,
+    SALDO_RESERVADO,
+    ESTADO
+) VALUES (
+    SEQ_CUENTAS_BANCARIAS.NEXTVAL,
+    'Banco G T Continental',
+    '003-000789-5',
+    'NUEVA VERAPAZ - Cuenta Operaciones',
+    'MONETARIA',
+    'GTQ',
+    75000,
+    0,
+    'A'
+);
+
 /* Chequera */
 
 INSERT INTO CHEQUERAS (
@@ -240,6 +520,72 @@ INSERT INTO CHEQUERAS (
     1001,
     1100,
     1001,
+    'A'
+);
+
+INSERT INTO CHEQUERAS (
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUERA,
+    NUMERO_INICIAL,
+    NUMERO_FINAL,
+    CORRELATIVO_ACTUAL,
+    ESTADO
+) VALUES (
+    SEQ_CHEQUERAS.NEXTVAL,
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    'CHQ-2026-002',
+    2001,
+    2050,
+    2001,
+    'A'
+);
+
+INSERT INTO CHEQUERAS (
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUERA,
+    NUMERO_INICIAL,
+    NUMERO_FINAL,
+    CORRELATIVO_ACTUAL,
+    ESTADO
+) VALUES (
+    SEQ_CHEQUERAS.NEXTVAL,
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '002-000456-8'
+    ),
+    'CHQ-2026-003',
+    3001,
+    3050,
+    3001,
+    'A'
+);
+
+INSERT INTO CHEQUERAS (
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUERA,
+    NUMERO_INICIAL,
+    NUMERO_FINAL,
+    CORRELATIVO_ACTUAL,
+    ESTADO
+) VALUES (
+    SEQ_CHEQUERAS.NEXTVAL,
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '003-000789-5'
+    ),
+    'CHQ-2026-004',
+    4001,
+    4050,
+    4001,
     'A'
 );
 
@@ -297,6 +643,993 @@ INSERT INTO CHEQUES (
     1,
     'N',
     'N'
+);
+
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_BENEFICIARIO,
+    MONTO,
+    CONCEPTO,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA,
+    USUARIO_GENERA,
+    FECHA_GENERACION,
+    USUARIO_AUDITORIA,
+    FECHA_AUDITORIA,
+    FIRMA_AUDITORIA,
+    USUARIO_ENTREGA,
+    FECHA_ENTREGA,
+    OBSERVACION
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    1004,
+    (
+        SELECT ID_BENEFICIARIO
+        FROM BENEFICIARIOS
+        WHERE NIT = '2222222-2'
+    ),
+    15000,
+    'Pago de transporte de mercaderia',
+    4,
+    'S',
+    'N',
+    'USR_PAGOS_SENIOR',
+    TO_DATE('2026-05-24', 'YYYY-MM-DD'),
+    'USR_AUDITOR',
+    TO_DATE('2026-05-25', 'YYYY-MM-DD'),
+    'FIRMA_DIGITAL_AUDITOR_001',
+    'USR_CAJERO',
+    TO_DATE('2026-05-26', 'YYYY-MM-DD'),
+    'Cheque aprobado por auditoria y entregado'
+);
+
+/* Cheque 1005: liberado por auditoria y gerencia, no entregado */
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_BENEFICIARIO,
+    MONTO,
+    CONCEPTO,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA,
+    USUARIO_GENERA,
+    FECHA_GENERACION,
+    USUARIO_AUDITORIA,
+    FECHA_AUDITORIA,
+    FIRMA_AUDITORIA,
+    USUARIO_GERENCIA,
+    FECHA_GERENCIA,
+    FIRMA_GERENCIA,
+    OBSERVACION
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    1005,
+    (
+        SELECT ID_BENEFICIARIO
+        FROM BENEFICIARIOS
+        WHERE NIT = '3333333-3'
+    ),
+    25000,
+    'Pago de avance de construccion',
+    3,
+    'S',
+    'S',
+    'USR_PAGOS_SENIOR',
+    TO_DATE('2026-05-24', 'YYYY-MM-DD'),
+    'USR_AUDITOR',
+    TO_DATE('2026-05-25', 'YYYY-MM-DD'),
+    'FIRMA_DIGITAL_AUDITOR_002',
+    'USR_GERENTE',
+    TO_DATE('2026-05-26', 'YYYY-MM-DD'),
+    'FIRMA_DIGITAL_GERENTE_001',
+    'Cheque liberado por auditoria y gerencia, pendiente de entrega'
+);
+
+/* Cheque 1006: anulado */
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_BENEFICIARIO,
+    MONTO,
+    CONCEPTO,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA,
+    USUARIO_GENERA,
+    FECHA_GENERACION,
+    OBSERVACION
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    1006,
+    (
+        SELECT ID_BENEFICIARIO
+        FROM BENEFICIARIOS
+        WHERE NIT = '4444444-4'
+    ),
+    3000,
+    'Pago anulado por error en beneficiario',
+    5,
+    'N',
+    'N',
+    'USR_JEFE_PAGOS',
+    TO_DATE('2026-05-25', 'YYYY-MM-DD'),
+    'Cheque anulado por solicitud del area de pagos'
+);
+
+/* Cheque 1007: generado menor a Q 5,000 */
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_BENEFICIARIO,
+    MONTO,
+    CONCEPTO,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA,
+    USUARIO_GENERA,
+    FECHA_GENERACION,
+    OBSERVACION
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    1007,
+    (
+        SELECT ID_BENEFICIARIO
+        FROM BENEFICIARIOS
+        WHERE NIT = '5555555-5'
+    ),
+    4900,
+    'Compra de materiales menores',
+    2,
+    'N',
+    'N',
+    'USR_MARIA_PAGOS',
+    TO_DATE('2026-05-26', 'YYYY-MM-DD'),
+    'Cheque generado que no requiere auditoria'
+);
+
+/* Cheque 1008: exactamente Q 5,000, liberado por auditoria */
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_BENEFICIARIO,
+    MONTO,
+    CONCEPTO,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA,
+    USUARIO_GENERA,
+    FECHA_GENERACION,
+    USUARIO_AUDITORIA,
+    FECHA_AUDITORIA,
+    FIRMA_AUDITORIA,
+    OBSERVACION
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    1008,
+    (
+        SELECT ID_BENEFICIARIO
+        FROM BENEFICIARIOS
+        WHERE NIT = '6666666-6'
+    ),
+    5000,
+    'Pago exacto que requiere auditoria',
+    3,
+    'S',
+    'N',
+    'USR_CARLOS_PAGOS',
+    TO_DATE('2026-05-27', 'YYYY-MM-DD'),
+    'USR_AUDITOR2',
+    TO_DATE('2026-05-28', 'YYYY-MM-DD'),
+    'FIRMA_DIGITAL_AUDITOR_003',
+    'Cheque de Q5000 liberado por auditoria'
+);
+
+/* Cheque 1009: Q 24,999.99, requiere auditoria pero no gerencia */
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_BENEFICIARIO,
+    MONTO,
+    CONCEPTO,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA,
+    USUARIO_GENERA,
+    FECHA_GENERACION,
+    OBSERVACION
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    1009,
+    (
+        SELECT ID_BENEFICIARIO
+        FROM BENEFICIARIOS
+        WHERE NIT = '7777777-7'
+    ),
+    24999.99,
+    'Pago menor al limite de gerencia',
+    2,
+    'S',
+    'N',
+    'USR_CARLOS_PAGOS',
+    TO_DATE('2026-05-28', 'YYYY-MM-DD'),
+    'Pendiente de auditoria, no requiere gerencia'
+);
+
+/* Cheque 1010: exactamente Q 25,000, requiere auditoria y gerencia */
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_BENEFICIARIO,
+    MONTO,
+    CONCEPTO,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA,
+    USUARIO_GENERA,
+    FECHA_GENERACION,
+    OBSERVACION
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    1010,
+    (
+        SELECT ID_BENEFICIARIO
+        FROM BENEFICIARIOS
+        WHERE NIT = '8888888-8'
+    ),
+    25000,
+    'Pago exacto que requiere auditoria y gerencia',
+    2,
+    'S',
+    'S',
+    'USR_PAGOS_SENIOR',
+    TO_DATE('2026-05-29', 'YYYY-MM-DD'),
+    'Pendiente de auditoria y gerencia'
+);
+
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-002'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    2001,
+    1,
+    'N',
+    'N'
+);
+
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-002'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    2002,
+    1,
+    'N',
+    'N'
+);
+
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-002'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    2003,
+    1,
+    'N',
+    'N'
+);
+
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-002'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    2004,
+    1,
+    'N',
+    'N'
+);
+
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-002'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    2005,
+    1,
+    'N',
+    'N'
+);
+
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-003'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '002-000456-8'
+    ),
+    3001,
+    1,
+    'N',
+    'N'
+);
+
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-003'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '002-000456-8'
+    ),
+    3002,
+    1,
+    'N',
+    'N'
+);
+
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-004'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '003-000789-5'
+    ),
+    4001,
+    1,
+    'N',
+    'N'
+);
+
+INSERT INTO CHEQUES (
+    ID_CHEQUE,
+    ID_CHEQUERA,
+    ID_CUENTA,
+    NUMERO_CHEQUE,
+    ID_ESTADO,
+    REQUIERE_AUDITORIA,
+    REQUIERE_GERENCIA
+) VALUES (
+    SEQ_CHEQUES.NEXTVAL,
+    (
+        SELECT ID_CHEQUERA
+        FROM CHEQUERAS
+        WHERE NUMERO_CHEQUERA = 'CHQ-2026-004'
+    ),
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '003-000789-5'
+    ),
+    4002,
+    1,
+    'N',
+    'N'
+);
+
+/* Liberacion de Cheques */
+/* Liberacion de auditoria para cheque 1004 */
+INSERT INTO LIBERACIONES_CHEQUE (
+    ID_LIBERACION,
+    ID_CHEQUE,
+    GRUPO_LIBERACION,
+    USUARIO_LIBERA,
+    FECHA_LIBERACION,
+    RESULTADO,
+    OBSERVACION
+) VALUES (
+    SEQ_LIBERACIONES_CHEQUE.NEXTVAL,
+    (
+        SELECT ID_CHEQUE
+        FROM CHEQUES
+        WHERE NUMERO_CHEQUE = 1004
+        AND ID_CHEQUERA = (
+            SELECT ID_CHEQUERA
+            FROM CHEQUERAS
+            WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+        )
+    ),
+    'AUDITORIA',
+    'USR_AUDITOR',
+    TO_DATE('2026-05-25', 'YYYY-MM-DD'),
+    'APROBADO',
+    'Liberacion aprobada por auditoria'
+);
+
+/* Liberacion de auditoria para cheque 1005 */
+INSERT INTO LIBERACIONES_CHEQUE (
+    ID_LIBERACION,
+    ID_CHEQUE,
+    GRUPO_LIBERACION,
+    USUARIO_LIBERA,
+    FECHA_LIBERACION,
+    RESULTADO,
+    OBSERVACION
+) VALUES (
+    SEQ_LIBERACIONES_CHEQUE.NEXTVAL,
+    (
+        SELECT ID_CHEQUE
+        FROM CHEQUES
+        WHERE NUMERO_CHEQUE = 1005
+        AND ID_CHEQUERA = (
+            SELECT ID_CHEQUERA
+            FROM CHEQUERAS
+            WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+        )
+    ),
+    'AUDITORIA',
+    'USR_AUDITOR',
+    TO_DATE('2026-05-25', 'YYYY-MM-DD'),
+    'APROBADO',
+    'Liberacion aprobada por auditoria'
+);
+
+/* Liberacion de gerencia para cheque 1005 */
+INSERT INTO LIBERACIONES_CHEQUE (
+    ID_LIBERACION,
+    ID_CHEQUE,
+    GRUPO_LIBERACION,
+    USUARIO_LIBERA,
+    FECHA_LIBERACION,
+    RESULTADO,
+    OBSERVACION
+) VALUES (
+    SEQ_LIBERACIONES_CHEQUE.NEXTVAL,
+    (
+        SELECT ID_CHEQUE
+        FROM CHEQUES
+        WHERE NUMERO_CHEQUE = 1005
+        AND ID_CHEQUERA = (
+            SELECT ID_CHEQUERA
+            FROM CHEQUERAS
+            WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+        )
+    ),
+    'GERENCIA',
+    'USR_GERENTE',
+    TO_DATE('2026-05-26', 'YYYY-MM-DD'),
+    'APROBADO',
+    'Liberacion aprobada por gerencia'
+);
+
+/* Liberacion de auditoria para cheque 1008 */
+INSERT INTO LIBERACIONES_CHEQUE (
+    ID_LIBERACION,
+    ID_CHEQUE,
+    GRUPO_LIBERACION,
+    USUARIO_LIBERA,
+    FECHA_LIBERACION,
+    RESULTADO,
+    OBSERVACION
+) VALUES (
+    SEQ_LIBERACIONES_CHEQUE.NEXTVAL,
+    (
+        SELECT ID_CHEQUE
+        FROM CHEQUES
+        WHERE NUMERO_CHEQUE = 1008
+        AND ID_CHEQUERA = (
+            SELECT ID_CHEQUERA
+            FROM CHEQUERAS
+            WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+        )
+    ),
+    'AUDITORIA',
+    'USR_AUDITOR2',
+    TO_DATE('2026-05-28', 'YYYY-MM-DD'),
+    'APROBADO',
+    'Cheque de Q5000 aprobado por auditoria'
+);
+
+/* Movimientos Cuenta Bancaria */
+/* Deposito a cuenta principal */
+INSERT INTO MOVIMIENTOS_CUENTA (
+    ID_MOVIMIENTO,
+    ID_CUENTA,
+    ID_CHEQUE,
+    TIPO_MOVIMIENTO,
+    NATURALEZA,
+    MONTO,
+    SALDO_ANTERIOR,
+    SALDO_NUEVO,
+    FECHA_MOVIMIENTO,
+    USUARIO_REGISTRA,
+    DESCRIPCION
+) VALUES (
+    SEQ_MOVIMIENTOS_CUENTA.NEXTVAL,
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    NULL,
+    'DEPOSITO',
+    'C',
+    50000,
+    100000,
+    150000,
+    TO_DATE('2026-05-18', 'YYYY-MM-DD'),
+    'USR_CAJERO',
+    'Deposito inicial para pruebas de movimientos'
+);
+
+/* Movimiento por cheque entregado 1001 */
+INSERT INTO MOVIMIENTOS_CUENTA (
+    ID_MOVIMIENTO,
+    ID_CUENTA,
+    ID_CHEQUE,
+    TIPO_MOVIMIENTO,
+    NATURALEZA,
+    MONTO,
+    SALDO_ANTERIOR,
+    SALDO_NUEVO,
+    FECHA_MOVIMIENTO,
+    USUARIO_REGISTRA,
+    DESCRIPCION
+) VALUES (
+    SEQ_MOVIMIENTOS_CUENTA.NEXTVAL,
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    (
+        SELECT ID_CHEQUE
+        FROM CHEQUES
+        WHERE NUMERO_CHEQUE = 1001
+        AND ID_CHEQUERA = (
+            SELECT ID_CHEQUERA
+            FROM CHEQUERAS
+            WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+        )
+    ),
+    'CHEQUE',
+    'D',
+    2500,
+    150000,
+    147500,
+    TO_DATE('2026-05-21', 'YYYY-MM-DD'),
+    'USR_CAJERO',
+    'Salida de dinero por cheque entregado 1001'
+);
+
+/* Movimiento por cheque entregado 1004 */
+INSERT INTO MOVIMIENTOS_CUENTA (
+    ID_MOVIMIENTO,
+    ID_CUENTA,
+    ID_CHEQUE,
+    TIPO_MOVIMIENTO,
+    NATURALEZA,
+    MONTO,
+    SALDO_ANTERIOR,
+    SALDO_NUEVO,
+    FECHA_MOVIMIENTO,
+    USUARIO_REGISTRA,
+    DESCRIPCION
+) VALUES (
+    SEQ_MOVIMIENTOS_CUENTA.NEXTVAL,
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '001-000123-0'
+    ),
+    (
+        SELECT ID_CHEQUE
+        FROM CHEQUES
+        WHERE NUMERO_CHEQUE = 1004
+        AND ID_CHEQUERA = (
+            SELECT ID_CHEQUERA
+            FROM CHEQUERAS
+            WHERE NUMERO_CHEQUERA = 'CHQ-2026-001'
+        )
+    ),
+    'CHEQUE',
+    'D',
+    15000,
+    147500,
+    132500,
+    TO_DATE('2026-05-26', 'YYYY-MM-DD'),
+    'USR_CAJERO',
+    'Salida de dinero por cheque entregado 1004'
+);
+
+/* Deposito a cuenta de proveedores */
+INSERT INTO MOVIMIENTOS_CUENTA (
+    ID_MOVIMIENTO,
+    ID_CUENTA,
+    ID_CHEQUE,
+    TIPO_MOVIMIENTO,
+    NATURALEZA,
+    MONTO,
+    SALDO_ANTERIOR,
+    SALDO_NUEVO,
+    FECHA_MOVIMIENTO,
+    USUARIO_REGISTRA,
+    DESCRIPCION
+) VALUES (
+    SEQ_MOVIMIENTOS_CUENTA.NEXTVAL,
+    (
+        SELECT ID_CUENTA
+        FROM CUENTAS_BANCARIAS
+        WHERE NUMERO_CUENTA = '002-000456-8'
+    ),
+    NULL,
+    'DEPOSITO',
+    'C',
+    75000,
+    250000,
+    325000,
+    TO_DATE('2026-05-27', 'YYYY-MM-DD'),
+    'USR_CAJERO2',
+    'Deposito a cuenta de proveedores'
+);
+
+/* Bitacora de Auditoria */
+INSERT INTO BITACORA_AUDITORIA (
+    ID_BITACORA,
+    USUARIO_BD,
+    FECHA_EVENTO,
+    TABLA_AFECTADA,
+    ID_REGISTRO,
+    ACCION,
+    VALOR_ANTERIOR,
+    VALOR_NUEVO,
+    RESULTADO,
+    DESCRIPCION
+) VALUES (
+    SEQ_BITACORA_AUDITORIA.NEXTVAL,
+    'USR_JUANITO',
+    TO_DATE('2026-05-20', 'YYYY-MM-DD'),
+    'CHEQUES',
+    '1001',
+    'GENERAR_CHEQUE',
+    NULL,
+    'MONTO=2500; ESTADO=GENERADO',
+    'EXITO',
+    'Cheque generado correctamente dentro del rango permitido'
+);
+
+INSERT INTO BITACORA_AUDITORIA (
+    ID_BITACORA,
+    USUARIO_BD,
+    FECHA_EVENTO,
+    TABLA_AFECTADA,
+    ID_REGISTRO,
+    ACCION,
+    VALOR_ANTERIOR,
+    VALOR_NUEVO,
+    RESULTADO,
+    DESCRIPCION
+) VALUES (
+    SEQ_BITACORA_AUDITORIA.NEXTVAL,
+    'USR_PAGOS2',
+    TO_DATE('2026-05-21', 'YYYY-MM-DD'),
+    'CHEQUES',
+    'SIN_REGISTRO',
+    'INTENTO_GENERAR_CHEQUE',
+    'RANGO_USUARIO=500-5000',
+    'MONTO_SOLICITADO=12000',
+    'FALLIDO',
+    'Intento fallido porque el monto excede el rango permitido del usuario'
+);
+
+INSERT INTO BITACORA_AUDITORIA (
+    ID_BITACORA,
+    USUARIO_BD,
+    FECHA_EVENTO,
+    TABLA_AFECTADA,
+    ID_REGISTRO,
+    ACCION,
+    VALOR_ANTERIOR,
+    VALOR_NUEVO,
+    RESULTADO,
+    DESCRIPCION
+) VALUES (
+    SEQ_BITACORA_AUDITORIA.NEXTVAL,
+    'USR_AUDITOR',
+    TO_DATE('2026-05-25', 'YYYY-MM-DD'),
+    'CHEQUES',
+    '1004',
+    'LIBERAR_AUDITORIA',
+    'ESTADO=GENERADO',
+    'ESTADO=LIBERADO_AUDITORIA',
+    'EXITO',
+    'Cheque liberado por auditoria'
+);
+
+INSERT INTO BITACORA_AUDITORIA (
+    ID_BITACORA,
+    USUARIO_BD,
+    FECHA_EVENTO,
+    TABLA_AFECTADA,
+    ID_REGISTRO,
+    ACCION,
+    VALOR_ANTERIOR,
+    VALOR_NUEVO,
+    RESULTADO,
+    DESCRIPCION
+) VALUES (
+    SEQ_BITACORA_AUDITORIA.NEXTVAL,
+    'USR_GERENTE',
+    TO_DATE('2026-05-26', 'YYYY-MM-DD'),
+    'CHEQUES',
+    '1005',
+    'LIBERAR_GERENCIA',
+    'ESTADO=LIBERADO_AUDITORIA',
+    'ESTADO=LIBERADO',
+    'EXITO',
+    'Cheque liberado por gerencia'
+);
+
+INSERT INTO BITACORA_AUDITORIA (
+    ID_BITACORA,
+    USUARIO_BD,
+    FECHA_EVENTO,
+    TABLA_AFECTADA,
+    ID_REGISTRO,
+    ACCION,
+    VALOR_ANTERIOR,
+    VALOR_NUEVO,
+    RESULTADO,
+    DESCRIPCION
+) VALUES (
+    SEQ_BITACORA_AUDITORIA.NEXTVAL,
+    'USR_CAJERO',
+    TO_DATE('2026-05-26', 'YYYY-MM-DD'),
+    'CHEQUES',
+    '1004',
+    'ENTREGAR_CHEQUE',
+    'ESTADO=LIBERADO',
+    'ESTADO=ENTREGADO',
+    'EXITO',
+    'Cheque entregado al beneficiario'
+);
+
+INSERT INTO BITACORA_AUDITORIA (
+    ID_BITACORA,
+    USUARIO_BD,
+    FECHA_EVENTO,
+    TABLA_AFECTADA,
+    ID_REGISTRO,
+    ACCION,
+    VALOR_ANTERIOR,
+    VALOR_NUEVO,
+    RESULTADO,
+    DESCRIPCION
+) VALUES (
+    SEQ_BITACORA_AUDITORIA.NEXTVAL,
+    'USR_CAJERO',
+    TO_DATE('2026-05-27', 'YYYY-MM-DD'),
+    'CHEQUES',
+    '1008',
+    'INTENTO_MODIFICAR_MONTO',
+    'MONTO=5000',
+    'MONTO=4500',
+    'FALLIDO',
+    'El cajero no tiene permisos para modificar montos'
+);
+
+INSERT INTO BITACORA_AUDITORIA (
+    ID_BITACORA,
+    USUARIO_BD,
+    FECHA_EVENTO,
+    TABLA_AFECTADA,
+    ID_REGISTRO,
+    ACCION,
+    VALOR_ANTERIOR,
+    VALOR_NUEVO,
+    RESULTADO,
+    DESCRIPCION
+) VALUES (
+    SEQ_BITACORA_AUDITORIA.NEXTVAL,
+    'USR_JEFE_PAGOS',
+    TO_DATE('2026-05-25', 'YYYY-MM-DD'),
+    'CHEQUES',
+    '1006',
+    'ANULAR_CHEQUE',
+    'ESTADO=GENERADO',
+    'ESTADO=ANULADO',
+    'EXITO',
+    'Cheque anulado por error en beneficiario'
 );
 
 COMMIT;
